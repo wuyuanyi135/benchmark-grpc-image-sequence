@@ -12,13 +12,41 @@
       </mat-form-field>
     </div>
     <div>
+      <mat-form-field>
+        <mat-label>Component</mat-label>
+        <mat-select  [(ngModel)]="componentSelection" [disabled]="streamState">
+          <mat-option value="1">
+            Image + blob url
+          </mat-option>
+          <mat-option value="2">
+            Canvas + server-side RGBA
+          </mat-option>
+          <mat-option value="3">
+            Canvas + client-side RGBA
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div>
       <mat-checkbox [(ngModel)]="streamState">stream</mat-checkbox>
     </div>
   </div>
 
-  <mat-grid-list cols="4" rowHeight="300px">
-    <mat-grid-tile  *ngFor="let i of buildArray(cardNumber); let ind = index">
-      <app-image-card [interval]="interval" [streaming]="streamState" [title]="ind"></app-image-card>
+  <mat-grid-list cols="4" rowHeight="">
+    <mat-grid-tile  *ngFor="let i of buildArray(cardNumber);" [ngSwitch]="componentSelection">
+      <div [ngTemplateOutlet]="imageBlobUrl" *ngSwitchCase="1"></div>
+      <div [ngTemplateOutlet]="serverSideCanvas" *ngSwitchCase="2"></div>
+      <div [ngTemplateOutlet]="clientSideCanvas" *ngSwitchCase="3"></div>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
+
+<ng-template #imageBlobUrl>
+  <app-image-card [streaming]="streamState" [interval]="interval"></app-image-card>
+</ng-template>
+<ng-template #serverSideCanvas>
+  <app-image-card-server-canvas [streaming]="streamState" [interval]="interval"></app-image-card-server-canvas>
+</ng-template>
+<ng-template #clientSideCanvas>
+</ng-template>

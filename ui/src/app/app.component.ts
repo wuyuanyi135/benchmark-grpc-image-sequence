@@ -10,6 +10,7 @@ export class AppComponent {
   cardNumber = 1;
   streamState = false;
   interval = 1000;
+  componentSelection = 1;
 
   buildArray(cardNumber: number): Array<any> {
     return Array(cardNumber);

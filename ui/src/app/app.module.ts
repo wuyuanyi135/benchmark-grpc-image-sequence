@@ -9,17 +9,19 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatGridListModule,
-  MatInputModule
+  MatInputModule, MatSelectModule
 } from '@angular/material';
 import { ImageCardComponent } from './image-card/image-card.component';
 import { SanitizeUrlPipe } from './sanitize-url.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ImageCardServerRgbaComponent } from './image-card-server-rgba/image-card-server-rgba.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ImageCardComponent,
-    SanitizeUrlPipe
+    SanitizeUrlPipe,
+    ImageCardServerRgbaComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatGridListModule,
     MatButtonToggleModule,
     MatCheckboxModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

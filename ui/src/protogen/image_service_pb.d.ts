@@ -7,6 +7,9 @@ export class ImageStreamRequest extends jspb.Message {
   getIntervalMs(): number;
   setIntervalMs(value: number): void;
 
+  getBitmap(): boolean;
+  setBitmap(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ImageStreamRequest.AsObject;
   static toObject(includeInstance: boolean, msg: ImageStreamRequest): ImageStreamRequest.AsObject;
@@ -20,6 +23,7 @@ export class ImageStreamRequest extends jspb.Message {
 export namespace ImageStreamRequest {
   export type AsObject = {
     intervalMs: number,
+    bitmap: boolean,
   }
 }
 
@@ -31,6 +35,12 @@ export class ImageStream extends jspb.Message {
 
   getType(): string;
   setType(value: string): void;
+
+  getHeight(): number;
+  setHeight(value: number): void;
+
+  getWidth(): number;
+  setWidth(value: number): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ImageStream.AsObject;
@@ -46,6 +56,8 @@ export namespace ImageStream {
   export type AsObject = {
     image: Uint8Array | string,
     type: string,
+    height: number,
+    width: number,
   }
 }
 

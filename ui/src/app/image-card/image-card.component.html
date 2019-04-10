@@ -1,10 +1,10 @@
 <mat-card>
-  <mat-card-title [class.end]="end">{{title}}</mat-card-title>
+  <mat-card-title [class.end]="end">Image + blob url</mat-card-title>
   <mat-card-subtitle>
     <div> Interval: {{interval}}</div>
     <div> Actual: {{actualInterval | async}}</div>
   </mat-card-subtitle>
   <mat-card-content>
-    <img [src]="ImageSrc | sanitizeUrl" *ngIf="ImageSrc" alt="">
+    <img [src]="ImageSrc | sanitizeUrl" *ngIf="ImageSrc" alt="" (load)="onload()">
   </mat-card-content>
 </mat-card>

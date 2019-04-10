@@ -12,7 +12,6 @@ import {bufferCount, map, takeUntil} from 'rxjs/operators';
   styleUrls: ['./image-card.component.css']
 })
 export class ImageCardComponent implements OnInit, OnDestroy {
-  @Input() title: string;
   @Input() interval: number;
 
   private _streaming = new BehaviorSubject(false);
@@ -64,7 +63,6 @@ export class ImageCardComponent implements OnInit, OnDestroy {
       const blob = new Blob([res.getImage_asU8()], {type: res.getType()});
       this.ImageSrc = URL.createObjectURL(blob);
       // this.ImageSrc = `data:${res.getType()};base64, ${res.getImage_asB64()}`;
-      this.messageReceived.next(Date.now());
     });
     client.onEnd((code, message) => {
       this.end = true;
@@ -77,7 +75,13 @@ export class ImageCardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destory.complete();
     if (this._streamClient) {
-      this._streamClient.close();
+      try {
+        this._streamClient.close();
+      } catch (e) {}
     }
+  }
+
+  onload() {
+    this.messageReceived.next(Date.now());
   }
 }

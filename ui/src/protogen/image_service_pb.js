@@ -60,7 +60,8 @@ proto.image_service.ImageStreamRequest.prototype.toObject = function(opt_include
  */
 proto.image_service.ImageStreamRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    intervalMs: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    intervalMs: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    bitmap: jspb.Message.getFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -101,6 +102,10 @@ proto.image_service.ImageStreamRequest.deserializeBinaryFromReader = function(ms
       var value = /** @type {number} */ (reader.readUint64());
       msg.setIntervalMs(value);
       break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setBitmap(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -137,6 +142,13 @@ proto.image_service.ImageStreamRequest.serializeBinaryToWriter = function(messag
       f
     );
   }
+  f = message.getBitmap();
+  if (f) {
+    writer.writeBool(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -152,6 +164,23 @@ proto.image_service.ImageStreamRequest.prototype.getIntervalMs = function() {
 /** @param {number} value */
 proto.image_service.ImageStreamRequest.prototype.setIntervalMs = function(value) {
   jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional bool bitmap = 2;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.image_service.ImageStreamRequest.prototype.getBitmap = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 2, false));
+};
+
+
+/** @param {boolean} value */
+proto.image_service.ImageStreamRequest.prototype.setBitmap = function(value) {
+  jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
 
@@ -203,7 +232,9 @@ proto.image_service.ImageStream.prototype.toObject = function(opt_includeInstanc
 proto.image_service.ImageStream.toObject = function(includeInstance, msg) {
   var f, obj = {
     image: msg.getImage_asB64(),
-    type: jspb.Message.getFieldWithDefault(msg, 2, "")
+    type: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    height: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    width: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -248,6 +279,14 @@ proto.image_service.ImageStream.deserializeBinaryFromReader = function(msg, read
       var value = /** @type {string} */ (reader.readString());
       msg.setType(value);
       break;
+    case 3:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setHeight(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setWidth(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -288,6 +327,20 @@ proto.image_service.ImageStream.serializeBinaryToWriter = function(message, writ
   if (f.length > 0) {
     writer.writeString(
       2,
+      f
+    );
+  }
+  f = message.getHeight();
+  if (f !== 0) {
+    writer.writeUint64(
+      3,
+      f
+    );
+  }
+  f = message.getWidth();
+  if (f !== 0) {
+    writer.writeUint64(
+      4,
       f
     );
   }
@@ -345,6 +398,36 @@ proto.image_service.ImageStream.prototype.getType = function() {
 /** @param {string} value */
 proto.image_service.ImageStream.prototype.setType = function(value) {
   jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional uint64 height = 3;
+ * @return {number}
+ */
+proto.image_service.ImageStream.prototype.getHeight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.image_service.ImageStream.prototype.setHeight = function(value) {
+  jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional uint64 width = 4;
+ * @return {number}
+ */
+proto.image_service.ImageStream.prototype.getWidth = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.image_service.ImageStream.prototype.setWidth = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
 };
 
 

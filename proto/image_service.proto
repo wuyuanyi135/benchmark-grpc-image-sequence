@@ -4,10 +4,13 @@ option go_package = "github.com/wuyuanyi135/benchmark-grpc-image-sequence/protog
 
 message ImageStreamRequest {
     uint64 interval_ms = 1;
+    bool bitmap = 2; // ask server to decode file into bitmap
 }
 message ImageStream {
     bytes image = 1;
     string type = 2;
+    uint64 height = 3;
+    uint64 width = 4;
 }
 service ImageSequenceService {
     rpc ImageStreaming(ImageStreamRequest) returns (stream ImageStream);

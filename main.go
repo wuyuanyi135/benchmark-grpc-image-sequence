@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	dev := flag.Bool("Development", false, "use development forwarding")
+	dev := flag.Bool("dev", false, "use development forwarding")
 	flag.Parse()
 	if !*dev {
 		gin.SetMode(gin.ReleaseMode)
@@ -24,8 +24,10 @@ func main() {
 
 	imageService := NewImageServiceImpl()
 
-	protogen.RegisterImageSequenceServiceServer(server, imageService);
-	wrappedGrpc := grpcweb.WrapServer(server)
+	protogen.RegisterImageSequenceServiceServer(server, imageService)
+	wrappedGrpc := grpcweb.WrapServer(server, grpcweb.WithWebsockets(true), grpcweb.WithWebsocketOriginFunc(func(req *http.Request) bool {
+		return true
+	}))
 
 	router := gin.Default()
 	router.Use(GinGrpcWebMiddleware(wrappedGrpc))
@@ -41,7 +43,7 @@ func main() {
 		})
 	} else {
 		fmt.Println("Using dist files")
-		router.Static("/", path.Join("ui", "dist","ui"))
+		router.Static("/", path.Join("ui", "dist", "ui"))
 	}
 
 	if err := http.ListenAndServe(":8088", router); err != nil {

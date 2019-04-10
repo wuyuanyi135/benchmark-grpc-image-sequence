@@ -1,6 +1,9 @@
 <mat-card>
   <mat-card-title [class.end]="end">{{title}}</mat-card-title>
-  <mat-card-subtitle>Interval: {{interval}}</mat-card-subtitle>
+  <mat-card-subtitle>
+    <div> Interval: {{interval}}</div>
+    <div> Actual: {{actualInterval | async}}</div>
+  </mat-card-subtitle>
   <mat-card-content>
     <img [src]="ImageSrc | sanitizeUrl" *ngIf="ImageSrc" alt="">
   </mat-card-content>

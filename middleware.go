@@ -9,7 +9,9 @@ import (
 func GinGrpcWebMiddleware(m *grpcweb.WrappedGrpcServer) gin.HandlerFunc {
 
 	return func(context *gin.Context) {
-		if m.IsAcceptableGrpcCorsRequest(context.Request) || m.IsGrpcWebRequest(context.Request) {
+		if m.IsAcceptableGrpcCorsRequest(context.Request) ||
+			m.IsGrpcWebRequest(context.Request) ||
+			m.IsGrpcWebSocketRequest(context.Request) {
 			context.Status(http.StatusOK) // prevent 404 in gin
 			m.ServeHTTP(context.Writer, context.Request)
 		} else {

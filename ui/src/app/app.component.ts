@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ui';
+  cardNumber = 1;
+  streamState = false;
+  interval = 1000;
+
+  buildArray(cardNumber: number): Array<any> {
+    return Array(cardNumber);
+  }
 }

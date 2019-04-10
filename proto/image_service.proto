@@ -1,0 +1,15 @@
+syntax = "proto3";
+package image_service;
+option go_package = "github.com/wuyuanyi135/benchmark-grpc-image-sequence/protogen";
+
+message ImageStreamRequest {
+    uint64 interval_ms = 1;
+}
+message ImageStream {
+    bytes image = 1;
+    string type = 2;
+}
+service ImageSequenceService {
+    rpc ImageStreaming(ImageStreamRequest) returns (stream ImageStream);
+}
+
